@@ -1,0 +1,22 @@
+body {
+    margin-bottom: 25%;
+    font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
+h1 {
+    text-shadow: 2px 2px 4px #888;
+    border: solid #888;
+    border-width: 1px 0;
+    padding: 4px 0;
+}
+
+h2 {
+    text-shadow: 2px 2px 2px #888;
+    border: dotted #888;
+    border-width: 0 0 1px 0;
+    padding: 0 0 4px 0;
+}
+
+h3 {
+    text-shadow: 2px 2px 2px #888;
+}

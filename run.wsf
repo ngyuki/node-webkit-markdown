@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<job>
+<script language="JavaScript"><![CDATA[
+var wsh = WScript.CreateObject("WScript.Shell");
+var shapp = WScript.CreateObject("Shell.Application");
+
+function escapeArg(arg) {
+    return '"' + arg.replace(/"/g, '""') + '"'
+}
+
+wsh.Environment("Process")("PWD") = wsh.CurrentDirectory;
+
+var base = WScript.ScriptFullName.replace(/\\[^\\]*$/, '');
+var args = [escapeArg(base)];
+
+for (i=0; i<WScript.Arguments.length; i++)
+{
+    args.push(escapeArg(WScript.Arguments(i)));
+}
+
+shapp.ShellExecute(base + "\\node-webkit\\nw.exe", args.join(" "));
+]]></script>
+</job>
