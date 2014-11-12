@@ -10,6 +10,20 @@ $marked.setOptions({
     }
 });
 
+var $renderer = new $marked.Renderer();
+
+$renderer.table = function(header, body){
+    return '<table class="table table-bordered">\n'
+        + '<thead>\n'
+        + header
+        + '</thead>\n'
+        + '<tbody>\n'
+        + body
+        + '</tbody>\n'
+        + '</table>\n'
+    ;
+}
+
 var options = {
     filename: ""
 };
@@ -55,7 +69,7 @@ function watch(callback) {
 function render(filename, callback) {
     $fs.readFile(filename, function (err, data) {
         if (err) throw err;
-        callback($marked(data.toString()));
+        callback($marked(data.toString(), { renderer: $renderer }));
     });
 }
 
