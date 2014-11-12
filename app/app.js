@@ -9,7 +9,7 @@ $marked.setOptions({
         if (lang != null && $highlight.getLanguage(lang)) {
             return $highlight.highlight(lang, code).value;
         } else {
-            return $highlight.highlightAuto(code).value;
+            return $highlight.highlightAuto(code, []).value;
         }
     }
 });
