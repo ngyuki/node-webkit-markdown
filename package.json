@@ -1,8 +1,8 @@
 {
-  "name": "example-node-weblit",
+  "name": "node-webkit-markdown",
   "main": "app://localhost/app/index.html",
   "window": {
-    "title": "",
+    "title": "node-webkit-markdown",
     "toolbar": false
   },
   "dependencies": {

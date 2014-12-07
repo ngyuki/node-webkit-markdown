@@ -9,6 +9,7 @@ $(function(){
     app.start(function(html){
         var $container = $('#container');
         $container.html(html);
-        $('title').text($container.find('h1:eq(0)').text());
+        var win = gui.Window.get();
+        win.title = $container.find('h1:eq(0)').text() + ' - ' + gui.App.manifest.window.title;
     });
 });
