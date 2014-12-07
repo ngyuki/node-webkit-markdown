@@ -3,6 +3,7 @@ var $path = require('path');
 var $watchr = require('watchr');
 var $marked = require('marked');
 var $highlight = require('highlight.js');
+var $escape = require('escape-html');
 
 $marked.setOptions({
     highlight: function (code, lang) {
@@ -77,9 +78,15 @@ function render(filename, callback) {
     });
 }
 
+function baseTag() {
+    return '<base href="file:///{}">'.replace('{}', $escape(options.filename));
+}
+
 module.exports = {
     init: init,
     start: start,
     watch: watch,
-    render: render
+    render: render,
+    baseTag: baseTag
+
 };
