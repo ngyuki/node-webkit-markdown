@@ -7,7 +7,8 @@ document.write(app.baseTag());
 
 $(function(){
     app.start(function(html){
-        $('#container').html(html);
-        $('title').text($('#container h1:eq(0)').text());
+        var $container = $('#container');
+        $container.html(html);
+        $('title').text($container.find('h1:eq(0)').text());
     });
 });
