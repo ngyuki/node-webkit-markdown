@@ -10,10 +10,9 @@ $(function(){
         ev.preventDefault();
         app.open(this.href);
     });
-    app.start(function(html){
-        var $container = $('#container');
-        $container.html(html);
+    app.start(function(obj){
         var win = gui.Window.get();
-        win.title = $container.find('h1:eq(0)').text() + ' - ' + gui.App.manifest.window.title;
+        win.title = obj.title + ' - ' + gui.App.manifest.window.title;
+        $('#container').html(obj.body);
     });
 });

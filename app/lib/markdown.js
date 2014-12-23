@@ -11,9 +11,13 @@ marked.setOptions({
     }
 });
 
-var renderer = new marked.Renderer();
+function myRenderer(){}
 
-renderer.table = function(header, body){
+myRenderer.prototype = new marked.Renderer();
+myRenderer.prototype.constructor = myRenderer;
+myRenderer.super = marked.Renderer.prototype;
+
+myRenderer.prototype.table = function(header, body){
     return '<table class="table table-bordered">\n'
         + '<thead>\n'
         + header
@@ -23,8 +27,20 @@ renderer.table = function(header, body){
         + '</tbody>\n'
         + '</table>\n'
     ;
-}
+};
+
+myRenderer.prototype.heading = function(text, level, raw){
+    if (this.title == null && level == 1){
+        this.title = text;
+    }
+    return myRenderer.super.heading.apply(this, arguments);
+};
 
 module.exports = function(data){
-    return marked(data.toString(), { renderer: renderer })
+    var renderer = new myRenderer();
+    var body = marked(data.toString(), { renderer: renderer })
+    return {
+        title: renderer.title,
+        body: body
+    };
 };
