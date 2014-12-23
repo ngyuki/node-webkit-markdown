@@ -5,7 +5,7 @@ var escape = require('escape-html');
 var exec = require('child_process').exec;
 var markdown = require('./lib/markdown');
 
-var options = {
+var vars = {
     filename: "",
     callback: function(){},
 };
@@ -29,19 +29,19 @@ function init(argv) {
         fn = path.resolve(process.env.PWD, fn);
     }
 
-    options.filename = fn;
+    vars.filename = fn;
 }
 
 function start(callback) {
-    options.callback = callback;
-    render(options.filename, callback);
-    watch(callback);
+    vars.callback = callback;
+    render(vars.filename, callback);
+    watch(vars.filename, callback);
 }
 
-function watch(callback) {
+function watch(filename, callback) {
     watchr.watch({
-        paths: options.filename,
-        listeners: {change: function (event, filename) {
+        paths: filename,
+        listeners: {change: function (event, fn) {
             render(filename, callback);
         }},
         catchupDelay: 250,
@@ -57,15 +57,17 @@ function render(filename, callback) {
 }
 
 function baseTag() {
-    return '<base href="file:///{}">'.replace('{}', escape(options.filename));
+    return '<base href="file:///{}">'.replace('{}', escape(encodeURIComponent(vars.filename)));
 }
 
 function open(url) {
-    if (/^file:\/\/\//.test(url)){
-        //
-    } else {
+    if (openable(url)) {
         exec('start ' + url);
     }
+}
+
+function openable(url) {
+    return /^file:\/\/\//.test(url) == false;
 }
 
 module.exports = {
@@ -74,5 +76,6 @@ module.exports = {
     watch: watch,
     render: render,
     baseTag: baseTag,
-    open: open
+    open: open,
+    openable: openable
 };
