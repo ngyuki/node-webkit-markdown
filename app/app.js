@@ -4,6 +4,7 @@ var $watchr = require('watchr');
 var $marked = require('marked');
 var $highlight = require('highlight.js');
 var $escape = require('escape-html');
+var $exec = require('child_process').exec;
 
 $marked.setOptions({
     highlight: function (code, lang) {
@@ -30,7 +31,8 @@ $renderer.table = function(header, body){
 }
 
 var options = {
-    filename: ""
+    filename: "",
+    callback: function(){},
 };
 
 function init(argv) {
@@ -56,6 +58,7 @@ function init(argv) {
 }
 
 function start(callback) {
+    options.callback = callback;
     render(options.filename, callback);
     watch(callback);
 }
@@ -82,11 +85,19 @@ function baseTag() {
     return '<base href="file:///{}">'.replace('{}', $escape(options.filename));
 }
 
+function open(url) {
+    if (/^file:\/\/\//.test(url)){
+        //
+    } else {
+        $exec('start ' + url);
+    }
+}
+
 module.exports = {
     init: init,
     start: start,
     watch: watch,
     render: render,
-    baseTag: baseTag
-
+    baseTag: baseTag,
+    open: open
 };

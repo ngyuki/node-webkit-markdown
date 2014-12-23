@@ -6,6 +6,10 @@ app.init(gui.App.argv);
 document.write(app.baseTag());
 
 $(function(){
+    $(document).on('click', 'a[href]', function(ev){
+        ev.preventDefault();
+        app.open(this.href);
+    });
     app.start(function(html){
         var $container = $('#container');
         $container.html(html);
