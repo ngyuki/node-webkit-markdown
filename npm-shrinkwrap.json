@@ -21,8 +21,55 @@
       "from": "jquery@*"
     },
     "marked": {
-      "version": "0.3.2",
-      "from": "marked@>=0.3.2 <0.4.0"
+      "version": "0.2.9",
+      "from": "git://github.com/spicyj/marked-react",
+      "resolved": "git://github.com/spicyj/marked-react#8c08c471935bde74e98b621e5641d894b249602e"
+    },
+    "react": {
+      "version": "0.12.2",
+      "from": "react@*",
+      "resolved": "https://registry.npmjs.org/react/-/react-0.12.2.tgz",
+      "dependencies": {
+        "envify": {
+          "version": "3.2.0",
+          "from": "envify@>=3.0.0 <4.0.0",
+          "resolved": "https://registry.npmjs.org/envify/-/envify-3.2.0.tgz",
+          "dependencies": {
+            "through": {
+              "version": "2.3.6",
+              "from": "through@>=2.3.4 <2.4.0"
+            },
+            "jstransform": {
+              "version": "7.0.0",
+              "from": "jstransform@>=7.0.0 <8.0.0",
+              "resolved": "https://registry.npmjs.org/jstransform/-/jstransform-7.0.0.tgz",
+              "dependencies": {
+                "base62": {
+                  "version": "0.1.1",
+                  "from": "base62@0.1.1",
+                  "resolved": "https://registry.npmjs.org/base62/-/base62-0.1.1.tgz"
+                },
+                "esprima-fb": {
+                  "version": "7001.1.0-dev-harmony-fb",
+                  "from": "esprima-fb@>=7001.1.0-dev-harmony-fb <7001.2.0",
+                  "resolved": "https://registry.npmjs.org/esprima-fb/-/esprima-fb-7001.1.0-dev-harmony-fb.tgz"
+                },
+                "source-map": {
+                  "version": "0.1.31",
+                  "from": "source-map@0.1.31",
+                  "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.1.31.tgz",
+                  "dependencies": {
+                    "amdefine": {
+                      "version": "0.1.0",
+                      "from": "amdefine@>=0.0.4"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "watchr": {
       "version": "2.4.11",

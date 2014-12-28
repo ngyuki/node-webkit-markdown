@@ -3,7 +3,6 @@ var path = require('path');
 var watchr = require('watchr');
 var escape = require('escape-html');
 var exec = require('child_process').exec;
-var markdown = require('./lib/markdown');
 
 var vars = {
     filename: "",
@@ -52,12 +51,12 @@ function watch(filename, callback) {
 function render(filename, callback) {
     fs.readFile(filename, function (err, data) {
         if (err) throw err;
-        callback(markdown(data.toString()));
+        callback(data.toString());
     });
 }
 
-function baseTag() {
-    return '<base href="file:///{}">'.replace('{}', escape(encodeURIComponent(vars.filename)));
+function baseUrl() {
+    return vars.filename;
 }
 
 function open(url) {
@@ -75,7 +74,7 @@ module.exports = {
     start: start,
     watch: watch,
     render: render,
-    baseTag: baseTag,
+    baseUrl: baseUrl,
     open: open,
     openable: openable
 };
