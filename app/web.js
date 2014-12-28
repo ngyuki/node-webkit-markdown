@@ -1,25 +1,14 @@
 var gui = require('nw.gui');
 var app = require('./app');
-var highlight = require('highlight.js');
 
 app.init(gui.App.argv);
 
-markedReact.setOptions({
-    highlight: function (code, lang) {
-        if (lang != null && highlight.getLanguage(lang)) {
-            return highlight.highlight(lang, code).value;
-        } else {
-            return highlight.highlightAuto(code, []).value;
-        }
-    }
-});
-
 var Markdown = React.createClass({
     getInitialState: function() {
-        return { text: "loading..." };
+        return { elems: [] };
     },
     render: function() {
-        return React.createElement('div', {className: 'Markdown'}, markedReact(this.state.text));
+        return React.createElement('div', {className: 'Markdown'}, this.state.elems);
     },
 });
 
@@ -36,11 +25,11 @@ $(function(){
         document.getElementById('container')
     );
 
-    app.start(function(text){
+    app.start(function(obj){
         var win = gui.Window.get();
         //win.title = obj.title + ' - ' + gui.App.manifest.window.title;
 
-        react.setState({text: text})
+        react.setState({elems: obj.elems})
 
         setTimeout(function(){
             $('a[href]').filter(function(){

@@ -3,7 +3,7 @@
   "main": "app://localhost/app/index.html",
   "window": {
     "title": "node-webkit-markdown",
-    "toolbar": false
+    "toolbar": true
   },
   "dependencies": {
     "bootstrap": "^3.3.0",

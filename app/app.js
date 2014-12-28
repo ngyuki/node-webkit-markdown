@@ -1,8 +1,15 @@
+// for react.js on node-webkit
+global.document= window.document;
+global.navigator= window.navigator;
+
+// for marked-react on node.js
+global.React = require('react');
+
 var fs = require('fs');
 var path = require('path');
 var watchr = require('watchr');
-var escape = require('escape-html');
 var exec = require('child_process').exec;
+var markdown = require('./lib/markdown');
 
 var vars = {
     filename: "",
@@ -51,7 +58,7 @@ function watch(filename, callback) {
 function render(filename, callback) {
     fs.readFile(filename, function (err, data) {
         if (err) throw err;
-        callback(data.toString());
+        callback(markdown(data.toString()));
     });
 }
 
